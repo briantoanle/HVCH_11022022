@@ -20,24 +20,29 @@ def main():
 
   for i in ui2:
     if "1" in i:
-      co[0].append(i.split())
+      co[0].append(i.split()[1].upper())
     elif "2" in i:
-      co[1].append(i.split())
+      co[1].append(i.split()[1].upper())
     else:
       co[2].append(i.split())
 
   #print(co[0])
-
+  #print(co[0])
   listreturn = []
   # for loop to go through array of all classes
-  for i in range(1,2):
+  for i in range(0,2):
     # in each class
+    list1 = co[i]
 
+    print('here', list1)
+    findNew(list1)
 
     for j in range(len(co[i])):
-      list1 = co[i][j]
-      print(list1)
-      findNew(list1)
+
+      #list1 = co[i]
+
+      #print('here',list1)
+      #findNew(list1)
       """
         temp1 = co[i][j][1]
         temp2 = co[i][j-1][1]
@@ -62,24 +67,34 @@ def compareString(s1,s2):
   else:
     return False
 def findNew(mylist):
+  #print(mylist)
+  newlist = []
   for i in range(len(mylist)):
     for j in range(i + 1, len(mylist)):
-      print(mylist[i],mylist[j])
+      #print(mylist[i],mylist[j])
+      tempSt = find_similarity(mylist[i],mylist[j])
+      if tempSt not in newlist and tempSt != None:
+        newlist.append(tempSt)
       # if compare return true, it means strings are the same
       #if compareString(mylist[i], mylist[j]):
-
+  print(newlist)
 def find_similarity(s1, s2):
+  #print(s1,s2)
   if len(s1)==len(s2):
-    print(s1,s2)
+
     counter = 0
     for l in range(len(s1)):
       if s1[l] != s2[l]:
         counter += 1
     if counter < 2:
-      print(counter)
+      print('if counter',s2)
+      #print(counter)
       return s2
+    else:
+      return s1
   else:
-    print('Appending',s1)
+    print('else',s1)
+    #print('Appending',s2)
     return s1
 # separate user input into classes
 # go through names in each class
